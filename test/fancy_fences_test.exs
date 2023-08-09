@@ -110,5 +110,27 @@ defmodule FancyFencesTest do
 
       assert FancyFences.to_ast(markdown, opts) == ExDoc.Markdown.to_ast(expected)
     end
+
+    test "fancy fences in blockquotes work" do
+      markdown = """
+      > This should work in the blockquote
+      >   
+      > ```replace
+      > anything
+      > ```
+      """
+
+      expected = """
+      > This should work in the blockquote
+      >   
+      > * a list
+      > * with three
+      >   * elements
+      """
+
+      opts = [fences: %{"replace" => {Processors, :replace_with_list, []}}]
+
+      assert FancyFences.to_ast(markdown, opts) == ExDoc.Markdown.to_ast(expected)
+    end
   end
 end

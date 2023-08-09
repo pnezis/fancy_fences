@@ -24,6 +24,19 @@ defmodule FancyFences do
   end
 
   defp maybe_apply_fence_processors(
+         {:blockquote, attrs, content, meta},
+         opts,
+         applied_processors
+       ) do
+    content =
+      Enum.reduce(content, [], fn block, acc ->
+        acc ++ maybe_apply_fence_processors(block, opts, applied_processors)
+      end)
+
+    [{:blockquote, attrs, content, meta}]
+  end
+
+  defp maybe_apply_fence_processors(
          {:pre, _pre_attrs, [{:code, [class: fence], content, _code_meta}], _pre_meta} = block,
          opts,
          applied_processors
