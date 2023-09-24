@@ -1,19 +1,19 @@
 defmodule FancyFences.MixProject do
   use Mix.Project
 
-  @repo_url "https://github.com/pnezis/fancy_fences"
+  @scm_url "https://github.com/pnezis/fancy_fences"
+  @version "0.2.0"
 
   def project do
     [
       app: :fancy_fences,
-      version: "0.2.0",
+      version: @version,
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
+      source_url: @scm_url,
       deps: deps(),
       docs: docs(),
-
-      # Hex
-      description: "An earmark wrapper that post-processes code fences",
+      description: "Post-process code blocks in your markdown docs",
       package: package()
     ]
   end
@@ -35,14 +35,22 @@ defmodule FancyFences.MixProject do
   defp package do
     [
       maintainers: ["Panagiotis Nezis"],
-      licenses: ["Apache-2.0"],
-      links: %{"GitHub" => @repo_url}
+      licenses: ["MIT"],
+      links: %{"GitHub" => @scm_url}
     ]
   end
 
   defp docs do
     [
-      markdown_processor: {FancyFences, [fences: fence_processors()]}
+      canonical: "http://hexdocs.pm/fancy_fences",
+      source_url_pattern: "#{@scm_url}/blob/v#{@version}/%{path}#L%{line}",
+      skip_undefined_reference_warnings_on: ["CHANGELOG.md"],
+      markdown_processor: {FancyFences, [fences: fence_processors()]},
+      extras: [
+        {:"README.md", title: "Overview"},
+        "CHANGELOG.md",
+        "LICENSE"
+      ]
     ]
   end
 

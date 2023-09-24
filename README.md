@@ -19,3 +19,8 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/fancy_fences>.
 
+## License
+
+Copyright (c) 2023 Panagiotis Nezis
+
+Tucan is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
