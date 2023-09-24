@@ -38,9 +38,9 @@ defmodule FancyFences do
 
   will apply two processors:
 
-  - Each `elixir` code block will be post-processed using the `FancyFences.Processors.format_code/3`
+  - Each `elixir` code block will be post-processed using the `FancyFences.Processors.format_code/2`
   which will format the inline code.
-  - Each `elixir::inspect` code block will be post-processed using the `FancyFences.Processors.inspect_code/3`
+  - Each `elixir::inspect` code block will be post-processed using the `FancyFences.Processors.inspect_code/2`
   which will replace the existing code block with two blocks:
     - An `:elixir` code block including the initial code
     - A second `:elixir` block with the output of the evaluation of the first block.

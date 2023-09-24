@@ -10,6 +10,7 @@ defmodule FancyFences.MixProject do
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      docs: docs(),
 
       # Hex
       description: "An earmark wrapper that post-processes code fences",
@@ -37,5 +38,17 @@ defmodule FancyFences.MixProject do
       licenses: ["Apache-2.0"],
       links: %{"GitHub" => @repo_url}
     ]
+  end
+
+  defp docs do
+    [
+      markdown_processor: {FancyFences, [fences: fence_processors()]}
+    ]
+  end
+
+  defp fence_processors do
+    %{
+      "fence-processor" => {FancyFences.Processors, :fence_processor_doc, []}
+    }
   end
 end
