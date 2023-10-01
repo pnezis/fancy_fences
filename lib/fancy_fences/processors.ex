@@ -3,7 +3,7 @@ defmodule FancyFences.Processors do
   Common fence processors.
   """
 
-  @doc """
+  @doc ~S'''
   A fence processor for documenting fence processors usage.
 
   This can be used for documenting fence processors. It return an admonition
@@ -19,14 +19,31 @@ defmodule FancyFences.Processors do
   For example:
 
   ~~~
-  ```fence-processor-docs
+  ```fence-processor
   %{
     block: "Enum.map([1, 2, 3], fn x -> 2*x end)",
     processor: fn block -> FancyFences.Processors.inspect_code(block) end
   }
   ```
   ~~~
-  """
+
+  ```fence-processor
+  %{
+    block: """
+    %{
+       block: "1 + 1",
+       processor: fn block -> 
+         "**Code:** `"<> block <> "`"
+       end
+    }
+    """,
+    processor: fn block -> FancyFences.Processors.fence_processor_doc(block) end
+  }
+  ```
+
+  Notice that above we used `fence_processor_doc/1` to document itself, that's why
+  we have the nested admonition block.
+  '''
   def fence_processor_doc(code) do
     {result, _} = Code.eval_string(code, [], __ENV__)
     %{block: block, processor: processor} = result

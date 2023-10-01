@@ -4,7 +4,7 @@
 [![Package](https://img.shields.io/badge/-Package-important)](https://hex.pm/packages/fancy_fences)
 [![Documentation](https://img.shields.io/badge/-Documentation-blueviolet)](https://hexdocs.pm/fancy_fences)
 
-`FancyFences` is a markdown processor on top of [`Earmark`](https://github.com/pragdave/earmark)
+`FancyFences` is a markdown processor on top of [`EarmarkParser`](https://github.com/pragdave/earmark)
 (the default markdown processor user by [`ExDoc`](https://github.com/elixir-lang/ex_doc). You can
 use it to conditionally post-process code blocks allowing you to:
 
