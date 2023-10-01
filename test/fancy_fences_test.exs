@@ -32,6 +32,12 @@ defmodule FancyFencesTest do
       ```
       """
     end
+
+    def dummy(_code) do
+      """
+      Dummy text
+      """
+    end
   end
 
   describe "to_ast/2" do
@@ -59,6 +65,50 @@ defmodule FancyFencesTest do
       """
 
       opts = [fences: %{"replace" => {Processors, :replace_with_list, []}}]
+
+      assert FancyFences.to_ast(markdown, opts) == ExDoc.Markdown.to_ast(expected)
+    end
+
+    test "is applied in deeply nested pre code items" do
+      markdown = """
+      # A heading
+
+      ```dummy
+      ```
+
+      > A blockquote
+      > 
+      > ```dummy
+      > ```
+      >
+      >> ```dummy
+      >> ```
+
+      * A list
+        * sublist
+          
+          ```dummy
+          ```
+      """
+
+      expected = """
+      # A heading
+
+      Dummy text
+
+      > A blockquote
+      > 
+      > Dummy text
+      >
+      >> Dummy text
+
+      * A list
+        * sublist
+          
+          Dummy text
+      """
+
+      opts = [fences: %{"dummy" => {Processors, :dummy, []}}]
 
       assert FancyFences.to_ast(markdown, opts) == ExDoc.Markdown.to_ast(expected)
     end
