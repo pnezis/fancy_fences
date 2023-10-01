@@ -1,5 +1,6 @@
 # FancyFences
 
+[![Actions Status](https://github.com/pnezis/fancy_fences/actions/workflows/elixir.yml/badge.svg)](https://github.com/pnezis/fancy_fences/actions)
 [![Package](https://img.shields.io/badge/-Package-important)](https://hex.pm/packages/fancy_fences)
 [![Documentation](https://img.shields.io/badge/-Documentation-blueviolet)](https://hexdocs.pm/fancy_fences)
 
