@@ -133,4 +133,8 @@ defmodule FancyFencesTest do
       assert FancyFences.to_ast(markdown, opts) == ExDoc.Markdown.to_ast(expected)
     end
   end
+
+  test "available?" do
+    assert FancyFences.available?() == ExDoc.Markdown.Earmark.available?()
+  end
 end

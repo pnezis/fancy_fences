@@ -13,7 +13,6 @@ defmodule FancyFences.Processors do
 
   It expects a map with the following key-value pairs:
 
-  - `lang` - the lang to be used for the example
   - `block` - the code block to use as an example
   - `processor` - an anonymous function with the processor that will be used.
 
@@ -48,7 +47,7 @@ defmodule FancyFences.Processors do
     #{processed}
 
     where `lang` the defined code language for this fence processor in your
-    `mix.exs`.
+    `mix.exs`.\
     """
     |> to_admonition_block()
   end
@@ -58,7 +57,9 @@ defmodule FancyFences.Processors do
       block
       |> String.split("\n")
       |> Enum.map(fn line -> "> " <> line end)
+      |> Enum.map(&String.trim/1)
       |> Enum.join("\n")
+      |> String.trim()
 
     """
     > #### Embedded code {: .info}
@@ -81,12 +82,14 @@ defmodule FancyFences.Processors do
   }
   ```
   """
-  def inspect_code(code, _opts \\ []) do
+  def inspect_code(code, opts \\ []) do
+    opts = Keyword.validate!(opts, format: false)
+
     {result, _} = Code.eval_string(code, [], __ENV__)
 
     """
     ```elixir
-    #{code}
+    #{maybe_format(code, opts[:format])}
     ```
 
     ```elixir
@@ -94,4 +97,7 @@ defmodule FancyFences.Processors do
     ```
     """
   end
+
+  defp maybe_format(code, false), do: code
+  defp maybe_format(code, true), do: Code.format_string!(code)
 end

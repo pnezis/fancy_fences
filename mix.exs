@@ -14,7 +14,10 @@ defmodule FancyFences.MixProject do
       deps: deps(),
       docs: docs(),
       description: "Post-process code blocks in your markdown docs",
-      package: package()
+      package: package(),
+      test_coverage: [
+        summary: [threshold: 100]
+      ]
     ]
   end
 
