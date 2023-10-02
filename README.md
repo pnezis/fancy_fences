@@ -5,13 +5,15 @@
 [![Documentation](https://img.shields.io/badge/-Documentation-blueviolet)](https://hexdocs.pm/fancy_fences)
 
 `FancyFences` is a markdown processor on top of [`EarmarkParser`](https://github.com/pragdave/earmark)
-(the default markdown processor used by [`ExDoc`](https://github.com/elixir-lang/ex_doc). You can
-use it to conditionally post-process code blocks allowing you to:
+(the default markdown processor used by [`ExDoc`](https://github.com/elixir-lang/ex_doc).
+You can use it to conditionally post-process code blocks allowing you to:
 
 - Ensure that the code examples are valid
 - Format code blocks
-- Evaluate code blocks and include the output in the documenation, for example you can:
-  - add the `inspect` ouptut of a code block in order to have up to date code samples in your docs
+- Evaluate code blocks and include the output in the documenation, for example
+you can:
+  - add the `inspect` ouptut of a code block in order to have up to date code
+  samples in your docs
   - auto-generate vega-lite or mermaid plots
   - use it instead of interplation for evaluating functions within the current module.
 
@@ -82,7 +84,7 @@ In order to install the package add the following to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:fancy_fences, "~> 0.2.0", only: :dev, runtime: false}
+    {:fancy_fences, "~> 0.3.0", only: :dev, runtime: false}
   ]
 end
 ```
@@ -93,5 +95,5 @@ and configure your fence processors accoring to the [docs](https://hexdocs.pm/fa
 
 Copyright (c) 2023 Panagiotis Nezis
 
-Tucan is released under the MIT License. See the [LICENSE](LICENSE) file for more
-details.
+`fancy_fences` is released under the MIT License. See the [LICENSE](LICENSE) file
+for more details.

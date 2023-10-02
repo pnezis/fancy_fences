@@ -2,7 +2,7 @@ defmodule FancyFences.MixProject do
   use Mix.Project
 
   @scm_url "https://github.com/pnezis/fancy_fences"
-  @version "0.2.0"
+  @version "0.3.0"
 
   def project do
     [
@@ -45,6 +45,7 @@ defmodule FancyFences.MixProject do
 
   defp docs do
     [
+      main: "readme",
       canonical: "http://hexdocs.pm/fancy_fences",
       source_url_pattern: "#{@scm_url}/blob/v#{@version}/%{path}#L%{line}",
       skip_undefined_reference_warnings_on: ["CHANGELOG.md"],
