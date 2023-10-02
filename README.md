@@ -5,7 +5,7 @@
 [![Documentation](https://img.shields.io/badge/-Documentation-blueviolet)](https://hexdocs.pm/fancy_fences)
 
 `FancyFences` is a markdown processor on top of [`EarmarkParser`](https://github.com/pragdave/earmark)
-(the default markdown processor user by [`ExDoc`](https://github.com/elixir-lang/ex_doc). You can
+(the default markdown processor used by [`ExDoc`](https://github.com/elixir-lang/ex_doc). You can
 use it to conditionally post-process code blocks allowing you to:
 
 - Ensure that the code examples are valid
@@ -14,6 +14,8 @@ use it to conditionally post-process code blocks allowing you to:
   - add the `inspect` ouptut of a code block in order to have up to date code samples in your docs
   - auto-generate vega-lite or mermaid plots
   - use it instead of interplation for evaluating functions within the current module.
+
+![mermaid example](https://github.com/pnezis/fancy_fences/raw/main/assets/mermaid.png)
 
 ## Usage
 
@@ -35,8 +37,8 @@ docs: [
 
 defp fancy_processors do
   %{
-    "elixir" => {FancyFences.Processors, :format_code, []},
-    "inspect" => {FancyFences.Processors, :inspect_code, []},
+    "format" => {FancyFences.Processors, :format_code, []},
+    "inspect" => {FancyFences.Processors, :inspect_code, [format: true]},
     "vl" => {MyProcessors, :vega_lite, []},
     "mermaid" => {MyProcessors, :mermaid, []}
   }
@@ -45,7 +47,7 @@ end
 
 will apply the following processors:
 
-- Each `elixir` code block will be post-processed using the `FancyFences.Processors.format_code/1`
+- Each `format` code block will be post-processed using the `FancyFences.Processors.format_code/1`
 which will format the inline code.
 - Each `inspect` code block will be post-processed using the `FancyFences.Processors.inspect_code/2`
 which will replace the existing code block with two blocks:
@@ -55,6 +57,19 @@ which will replace the existing code block with two blocks:
 block and replaces it with the original block and the evaluated vega-lite spec.
 You can see such a processor used throughout [`Tucan` docs](https://hexdocs.pm/tucan/Tucan.html)
 - Similarly for the mermaid blocks.
+
+Now in your markdown docs you can use the above processors as language and `fancy_fences`
+will apply the required transformations during `mix docs` invocation.
+
+### Examples
+
+`inspect` fence processor example:
+
+![inspect example](https://github.com/pnezis/fancy_fences/raw/main/assets/inspect.png)
+
+`vl` fence processor example:
+
+![vega-lite example](https://github.com/pnezis/fancy_fences/raw/main/assets/vl.png)
 
 ### Example project
 
