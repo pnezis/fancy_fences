@@ -102,4 +102,24 @@ defmodule FancyFences.ProcessorsTest do
       assert FancyFences.Processors.inspect_code(block, format: true) == expected
     end
   end
+
+  describe "format_code/1" do
+    test "with unformatted code block" do
+      block = """
+      for x <- 1..3 do
+      2*x
+      end
+      """
+
+      expected = """
+      ```elixir
+      for x <- 1..3 do
+        2 * x
+      end
+      ```
+      """
+
+      assert FancyFences.Processors.format_code(block) == expected
+    end
+  end
 end

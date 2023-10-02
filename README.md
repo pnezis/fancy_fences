@@ -45,7 +45,7 @@ end
 
 will apply the following processors:
 
-- Each `elixir` code block will be post-processed using the `FancyFences.Processors.format_code/2`
+- Each `elixir` code block will be post-processed using the `FancyFences.Processors.format_code/1`
 which will format the inline code.
 - Each `inspect` code block will be post-processed using the `FancyFences.Processors.inspect_code/2`
 which will replace the existing code block with two blocks:

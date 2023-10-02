@@ -115,6 +115,28 @@ defmodule FancyFences.Processors do
     """
   end
 
+  @doc ~S'''
+  Formats the given code block.
+
+  ```fence-processor
+  %{
+    block: """
+    for x <- [1, 2, 3] do
+    2 * x
+    end
+    """,
+    processor: fn block -> FancyFences.Processors.format_code(block) end
+  }
+  ```
+  '''
+  def format_code(code) do
+    """
+    ```elixir
+    #{maybe_format(code, true)}
+    ```
+    """
+  end
+
   defp maybe_format(code, false), do: code
   defp maybe_format(code, true), do: Code.format_string!(code)
 end

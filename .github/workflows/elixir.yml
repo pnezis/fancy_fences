@@ -38,4 +38,4 @@ jobs:
     - name: Format
       run: mix format --check-formatted
     - name: Test
-      run: mix test
+      run: mix test --cover
