@@ -103,6 +103,78 @@ defmodule FancyFences.ProcessorsTest do
     end
   end
 
+  describe "multi_inspect/2" do
+    test "with valid expression" do
+      block = """
+      list =[1,2, 3]
+      Enum.map(list, fn x -> 2 * x end)
+      >>>
+
+      Enum.map(list, fn x -> 2 + x end)
+      """
+
+      expected = """
+      ```elixir
+      list =[1,2, 3]
+      Enum.map(list, fn x -> 2 * x end)
+      [2, 4, 6]
+
+      Enum.map(list, fn x -> 2 + x end)
+      [3, 4, 5]
+      ```
+      """
+
+      assert FancyFences.Processors.multi_inspect(block) == expected
+    end
+
+    test "with iex and format flags" do
+      block = """
+      list = [1, 2, 3]
+      Enum.map(list, fn x -> 2 * x end)
+      >>>
+
+      Enum.map(list, fn x -> 2 + x end)
+      """
+
+      expected = """
+      ```elixir
+      iex> list = [1, 2, 3]
+      ...> Enum.map(list, fn x -> 2 * x end)
+      [2, 4, 6]
+
+      iex> Enum.map(list, fn x -> 2 + x end)
+      [3, 4, 5]
+      ```
+      """
+
+      assert FancyFences.Processors.multi_inspect(block, format: true, iex_prefix: true) ==
+               expected
+    end
+
+    test "with different separator" do
+      block = """
+      list =[1,2, 3]
+      Enum.map(list, fn x -> 2 * x end)
+      ???
+
+      Enum.map(list, fn x -> 2 + x end)
+      """
+
+      expected = """
+      ```elixir
+      list =[1,2, 3]
+      Enum.map(list, fn x -> 2 * x end)
+      [2, 4, 6]
+
+      Enum.map(list, fn x -> 2 + x end)
+      [3, 4, 5]
+      ```
+      """
+
+      assert FancyFences.Processors.multi_inspect(block, separator: "???") == expected
+    end
+  end
+
   describe "format_code/1" do
     test "with unformatted code block" do
       block = """
