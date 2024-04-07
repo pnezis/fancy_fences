@@ -31,7 +31,7 @@ defmodule FancyFences.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.29"}
+      {:ex_doc, "~> 0.31"}
     ]
   end
 
