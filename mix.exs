@@ -39,7 +39,10 @@ defmodule FancyFences.MixProject do
     [
       maintainers: ["Panagiotis Nezis"],
       licenses: ["MIT"],
-      links: %{"GitHub" => @scm_url}
+      links: %{
+        "GitHub" => @scm_url,
+        "Changelog" => @scm_url <> "/blob/main/CHANGELOG.md"
+      }
     ]
   end
 
